@@ -98,20 +98,20 @@ In our paper, we conduct experiments on the [VCTK](https://datashare.ed.ac.uk/ha
     ```
     $ python main.py --mode eval --version 0
     ```
-     This will give the mean and standard deviation of LSD, LSD-HF, and SI-SDR, respectively. During the evaluation, several output samples are saved to `config.LOG.sample_path` for sanity testing.
+     This will give the mean and standard deviation of LSD, LSD-HF, and SI-SDR, respectively. During the evaluation, several output samples are saved to `CONFIG.LOG.sample_path` for sanity testing.
 
 ## Audio generation
-* In order to generate output audios, you need to either put your input samples into `./test_samples` or modify `config.TEST.in_dir` to your input directory. 
+* In order to generate output audios, you need to either put your input samples into `./test_samples` or modify `CONFIG.TEST.in_dir` to your input directory. 
 * Run `main.py`:
     ```
     python main.py --mode test --version 0
     ```
-    The generated audios are saved to `config.TEST.out_dir`.
+    The generated audios are saved to `CONFIG.TEST.out_dir`.
 
 ## Configure a new dataset
 Our implementation currently works with the VCTK and VIVOS datasets but can be easily extensible to a new one.
 * Firstly, you need to prepare `train.txt` and `test.txt`. See `./data/vivos/train.txt` and `./data/vivos/test.txt` for example.
-* Secondly, add a new dictionary to `config.DATA.data_dir`:
+* Secondly, add a new dictionary to `CONFIG.DATA.data_dir`:
     ```
     {
     'root': 'path/to/data/directory',
