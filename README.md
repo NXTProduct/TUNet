@@ -11,7 +11,7 @@ Viet-Anh Nguyen, Anh H. T. Nguyen, and Andy W. H. Khong
 ## Setup
 ### Clone the repo
 ```
-$ git clone https://github.com/kuleshov/audio-super-res.git
+$ git clone https://github.com/NXTProduct/TUNet.git
 $ cd TUNet
 ```
 ### Install dependencies
