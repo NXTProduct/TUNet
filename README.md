@@ -98,7 +98,7 @@ In our paper, we conduct experiments on the [VCTK](https://datashare.ed.ac.uk/ha
     ```
     $ python main.py --mode eval --version 0
     ```
-     This will give the mean and standard deviation of LSD, LSD-HF, and SI-SDR, respectively. During the evaluation, several output samples are saved to `./audio_samples` for sanity testing.
+     This will give the mean and standard deviation of LSD, LSD-HF, and SI-SDR, respectively. During the evaluation, several output samples are saved to `config.LOG.sample_path` for sanity testing.
 
 ## Audio generation
 * In order to generate output audios, you need to either put your input samples into `./test_samples` or modify `config.TEST.in_dir` to your input directory. 
