@@ -111,7 +111,7 @@ In our paper, we conduct experiments on the [VCTK](https://datashare.ed.ac.uk/ha
 ## Configure a new dataset
 Our implementation currently works with the VCTK and VIVOS datasets but can be easily extensible to a new one.
 * Firstly, you need to prepare `train.txt` and `test.txt`. See `./data/vivos/train.txt` and `./data/vivos/test.txt` for example.
-* Add a new dictionary to `config.DATA.data_dir`:
+* Secondly, add a new dictionary to `config.DATA.data_dir`:
     ```
     {
     'root': 'path/to/data/directory',
