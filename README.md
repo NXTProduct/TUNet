@@ -1,7 +1,7 @@
 # TUNet - Official Implementation
 **TUNet: A Block-online Bandwidth Extension Model based on Transformers and Self-supervised Pretraining**
 
-Viet-Anh Nguyen, Anh H. T. Nguyen, Andy W. H. Khong
+Viet-Anh Nguyen, Anh H. T. Nguyen, and Andy W. H. Khong
 
 [![arXiv](https://img.shields.io/badge/arXiv-2110.13492-<COLOR>.svg)](https://arxiv.org/abs/2110.13492)
 
