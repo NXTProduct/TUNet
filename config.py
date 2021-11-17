@@ -60,7 +60,7 @@ class CONFIG:
         'root' is the path to the dataset and each line of the train.txt/test.txt files should contains the path to an
         audio file from 'root'. 
         '''
-        data_dir = {'vctk': {'root': 'data/vctk/VCTK-Corpus/wav48',
+        data_dir = {'vctk': {'root': 'data/vctk/wav48',
                              'train': "data/vctk/train.txt",
                              'test': "data/vctk/test.txt"},
                     'vivos': {'root': 'data/vivos',
