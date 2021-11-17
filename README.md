@@ -36,10 +36,10 @@ In our paper, we conduct experiments on the [VCTK](https://datashare.ed.ac.uk/ha
 
 * Download and extract the datasets:
     ```
-    $ wget http://www.udialogue.org/download/VCTK-Corpus.tar.gz -O data/vctk/
-    $ wget https://ailab.hcmus.edu.vn/assets/vivos.tar.gz -O data/vivos/
-    $ tar -zxvf data/vctk/VCTK-Corpus.tar.gz 
-    $ tar -zxvf data/vivos/vivos.tar.gz 
+    $ wget http://www.udialogue.org/download/VCTK-Corpus.tar.gz -O data/vctk/VCTK-Corpus.tar.gz
+    $ wget https://ailab.hcmus.edu.vn/assets/vivos.tar.gz -O data/vivos/vivos.tar.gz
+    $ tar -zxvf data/vctk/VCTK-Corpus.tar.gz -C data/vctk/ --strip-components=1
+    $ tar -zxvf data/vivos/vivos.tar.gz -C data/vivos/ --strip-components=1
     ```
 
     After extracting the datasets, your `./data` directory should look like this:
@@ -48,24 +48,25 @@ In our paper, we conduct experiments on the [VCTK](https://datashare.ed.ac.uk/ha
     .
     |--data
         |--vctk
-            |--raw
-                |--VCTK-Corpus
-                    |--wav48
-                        |--p225
-                            |--p225_001.wav
-                            ...
-
-         |--vivos
-                |--train
-                    |--waves
-                        |--VIVOSSPK01
-                            |--VIVOSSPK12_R001.wav
-                            ...                
-                |--test
-                    |--waves
-                        |--VIVOSDEV01
-                            |--VIVOSDEV01_R001.wav
-                            ...                                    
+            |--wav48
+                |--p225
+                    |--p225_001.wav
+                    ...
+            |--train.txt   
+            |--test.txt
+        |--vivos
+            |--train
+                |--waves
+                    |--VIVOSSPK01
+                        |--VIVOSSPK12_R001.wav
+                        ...                
+            |--test
+                |--waves
+                    |--VIVOSDEV01
+                        |--VIVOSDEV01_R001.wav
+                        ...      
+            |--train.txt   
+            |--test.txt
     ```
 * In order to load the datasets, text files that contain training and testing audio paths are required. We have prepared `train.txt` and `test.txt` files in `./data/vctk` and `./data/vivos` directories.
 
