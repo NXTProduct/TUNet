@@ -3,8 +3,9 @@
 
 Viet-Anh Nguyen, Anh H. T. Nguyen, and Andy W. H. Khong
 
-[![arXiv](https://img.shields.io/badge/arXiv-2110.13492-<COLOR>.svg)](https://arxiv.org/abs/2110.13492)
-
+[![Generic badge](https://img.shields.io/badge/arXiv-2110.13492-brightgreen.svg?style=flat-square)](https://arxiv.org/abs/2110.13492)
+[![Generic badge](https://img.shields.io/github/stars/NXTProduct/TUNet?color=yellow&label=TUNet&logo=github&style=flat-square)](https://github.com/NXTProduct/TUNet/)
+[![Generic badge](https://img.shields.io/github/last-commit/NXTProduct/TUNet?color=blue&label=last%20commit&style=flat-square)](https://github.com/NXTProduct/TUNet/commits)
 
 
 # 1. Installation
