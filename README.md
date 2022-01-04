@@ -26,7 +26,7 @@ Copyright © 2021 FPT Software, Inc. All rights reserved.
 ```
 
 # 1. Results
-Our model achieved a significant gain over baselines in both objective and subjective tests. Here, we show subjective scores based on Microsoft's [DNSMOS](https://github.com/microsoft/DNS-Challenge/tree/master/DNSMOS). Please refer to our paper for more benchmarks.
+Our model achieved a significant gain over baselines in both objective and subjective tests. Here, we include the predicted mean-opion-score (MOS) using Microsoft's [DNSMOS](https://github.com/microsoft/DNS-Challenge/tree/master/DNSMOS) Azure service. Please refer to our paper for more benchmarks.
 
 | Model | DNSMOS | 
 | -------- | -------- |
@@ -199,4 +199,6 @@ Our implementation currently works with the VCTK and VIVOS datasets but can be e
     ```
   **Important:** Make sure each line in `train.txt` and `test.txt` joining with `'root'` is a valid path to its
   corresponding audio file.
-  
+# 5. Acknowledgement
+Thank FPT Software for funding and providing GPU infrastructure. 
+We also thank Microsoft for giving access to the DNSMOS Azure service. 
