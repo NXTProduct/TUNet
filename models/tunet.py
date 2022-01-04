@@ -142,7 +142,7 @@ class BaseModel(pl.LightningModule):
         self.train_sisdr = SI_SDR()
         self.valid_sisdr = SI_SDR()
         self.time_loss = nn.MSELoss()
-        self.freq_loss = MRSTFTLossDDP(n_bins=64, sample_rate=CONFIG.DATA.sr, device="cuda", scale='mel')
+        self.freq_loss = MRSTFTLossDDP(n_bins=64, sample_rate=CONFIG.DATA.sr, device="cpu", scale='mel')
 
     def forward(self, x):
         raise NotImplementedError

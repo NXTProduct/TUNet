@@ -1,4 +1,5 @@
 # TUNet - Official Implementation
+
 **TUNet: A Block-online Bandwidth Extension Model based on Transformers and Self-supervised Pretraining**
 
 Viet-Anh Nguyen, Anh H. T. Nguyen, and Andy W. H. Khong
@@ -7,32 +8,44 @@ Viet-Anh Nguyen, Anh H. T. Nguyen, and Andy W. H. Khong
 [![Generic badge](https://img.shields.io/github/stars/NXTProduct/TUNet?color=yellow&label=TUNet&logo=github&style=flat-square)](https://github.com/NXTProduct/TUNet/)
 [![Generic badge](https://img.shields.io/github/last-commit/NXTProduct/TUNet?color=blue&label=last%20commit&style=flat-square)](https://github.com/NXTProduct/TUNet/commits)
 
-
 # 1. Installation
+
 ## Setup
+
 ### Clone the repo
+
 ```
 $ git clone https://github.com/NXTProduct/TUNet.git
 $ cd TUNet
 ```
+
 ### Install dependencies
-* Our implementation requires the `libsndfile` and `libsamplerate` libraries for the Python packages `soundfile` and `samplerate`, respectively. On Ubuntu, they can be easily installed using `apt-get`:
+
+* Our implementation requires the `libsndfile` and `libsamplerate` libraries for the Python packages `soundfile`
+  and `samplerate`, respectively. On Ubuntu, they can be easily installed using `apt-get`:
     ```
     $ apt-get update && apt-get install libsndfile-dev libsamplerate-dev
     ```
-*  Create a Python 3.8 environment. Conda is recommended:
-    ```
-    $ conda create -n tunet python=3.8
-    $ conda activate tunet
-    ```
+* Create a Python 3.8 environment. Conda is recommended:
+   ```
+   $ conda create -n tunet python=3.8
+   $ conda activate tunet
+   ```
 
 * Install the requirements:
     ```
     $ pip install -r requirements.txt -f https://download.pytorch.org/whl/cu113/torch_stable.html
     ```
-**Note**: the argument `-f https://download.pytorch.org/whl/cu113/torch_stable.html` is provided to install `torch==1.10.0+cu113`  (Pytorch 1.10, CUDA 11.3) inside the `requirements.txt` . Choose an appropriate CUDA version to your GPUs and change/remove the argument according to [PyTorch documentation](https://pytorch.org/get-started/locally/)
+
+**Note**: the argument `-f https://download.pytorch.org/whl/cu113/torch_stable.html` is provided to
+install `torch==1.10.0+cu113`  (Pytorch 1.10, CUDA 11.3) inside the `requirements.txt` . Choose an appropriate CUDA
+version to your GPUs and change/remove the argument according
+to [PyTorch documentation](https://pytorch.org/get-started/locally/)
+
 # 2. Data preparation
-In our paper, we conduct experiments on the [VCTK](https://datashare.ed.ac.uk/handle/10283/3443) and [VIVOS](https://ailab.hcmus.edu.vn/vivos) datasets. You may use either one or both.
+
+In our paper, we conduct experiments on the [VCTK](https://datashare.ed.ac.uk/handle/10283/3443)
+and [VIVOS](https://ailab.hcmus.edu.vn/vivos) datasets. You may use either one or both.
 
 * Download and extract the datasets:
     ```
@@ -42,7 +55,7 @@ In our paper, we conduct experiments on the [VCTK](https://datashare.ed.ac.uk/ha
     $ tar -zxvf data/vivos/vivos.tar.gz -C data/vivos/ --strip-components=1
     ```
 
-    After extracting the datasets, your `./data` directory should look like this:
+  After extracting the datasets, your `./data` directory should look like this:
 
     ```
     .
@@ -68,51 +81,81 @@ In our paper, we conduct experiments on the [VCTK](https://datashare.ed.ac.uk/ha
             |--train.txt   
             |--test.txt
     ```
-* In order to load the datasets, text files that contain training and testing audio paths are required. We have prepared `train.txt` and `test.txt` files in `./data/vctk` and `./data/vivos` directories.
+* In order to load the datasets, text files that contain training and testing audio paths are required. We have
+  prepared `train.txt` and `test.txt` files in `./data/vctk` and `./data/vivos` directories.
 
 # 3. Run the code
+
 ## Configuration
-`config.py` is the most important file. Here, you can find all the configurations related to experiment setups, datasets, models, training, testing, etc. Although the config file has been explained thoroughly, we recommend reading our paper to fully understand each parameter.
+
+`config.py` is the most important file. Here, you can find all the configurations related to experiment setups,
+datasets, models, training, testing, etc. Although the config file has been explained thoroughly, we recommend reading
+our paper to fully understand each parameter.
 
 ## Training
-* Adjust training hyperparameters in `config.py` 
 
-    **Note:** `batch_size` in this implementation is different from the batch size in the paper. Specifically, we infer "batch size" in our paper as the number of **frames** per batch, whereas in this repo, `batch_size` is the number of **audio files** per batch. The DataLoader loads batches of audio files then chunks into frames on the fly. Since audio duration is variable, the number of frames per batch varies around 12*`batch_size` .
+* Adjust training hyperparameters in `config.py`
+
+  **Note:** `batch_size` in this implementation is different from the batch size in the paper. Specifically, we infer "
+  batch size" in our paper as the number of **frames** per batch, whereas in this repo, `batch_size` is the number of **
+  audio files** per batch. The DataLoader loads batches of audio files then chunks into frames on the fly. Since audio
+  duration is variable, the number of frames per batch varies around 12*`batch_size` .
 * Run `main.py`:
     ```
     $ python main.py --mode train
     ```
-* Each run will create a version in `./lightning_logs`, where the model checkpoint and hyperparameters are saved. In case you want to continue training from one of these versions, just set the argument `--version` of the above command to your desired version number. For example:
+* Each run will create a version in `./lightning_logs`, where the model checkpoint and hyperparameters are saved. In
+  case you want to continue training from one of these versions, just set the argument `--version` of the above command
+  to your desired version number. For example:
     ```
-    # resume from version 0
-    $ python main.py --mode train --version 0
+    # resume from version 5
+    $ python main.py --mode train --version 5
     ```
 * To monitor the training curves as well as inspect model output visualization, run the tensorboard:
     ```
     $ tensorboard --logdir=./lightning_logs --bind_all
     ```
-    ![image.png](https://images.viblo.asia/8da3b9e0-d9e8-470a-ae49-f3d8962fe130.png)
-    ![image.png](https://images.viblo.asia/75e40509-c36a-4055-af73-36ffd777ba87.png)
+  ![image.png](https://images.viblo.asia/8da3b9e0-d9e8-470a-ae49-f3d8962fe130.png)
+  ![image.png](https://images.viblo.asia/75e40509-c36a-4055-af73-36ffd777ba87.png)
 
 ## Evaluation
+
 * Modify `config.py` to change evaluation setup if necessary.
 * Run `main.py` with a version number to be evaluated:
     ```
-    $ python main.py --mode eval --version 0
+    $ python main.py --mode eval --version 5
     ```
-     This will give the mean and standard deviation of LSD, LSD-HF, and SI-SDR, respectively. During the evaluation, several output samples are saved to `CONFIG.LOG.sample_path` for sanity testing.
+  This will give the mean and standard deviation of LSD, LSD-HF, and SI-SDR, respectively. During the evaluation,
+  several output samples are saved to `CONFIG.LOG.sample_path` for sanity testing.
 
 ## Audio generation
-* In order to generate output audios, you need to either put your input samples into `./test_samples` or modify `CONFIG.TEST.in_dir` to your input directory. 
+
+* In order to generate output audios, you need to either put your input samples into `./test_samples` or
+  modify `CONFIG.TEST.in_dir` to your input directory.
 * Run `main.py`:
     ```
-    python main.py --mode test --version 0
+    python main.py --mode test --version 5
     ```
-    The generated audios are saved to `CONFIG.TEST.out_dir`.
+  The generated audios are saved to `CONFIG.TEST.out_dir`.
+  
+## ONNX inferencing
+We provide scripts for ONNX inferencing.
+* Convert a checkpoint to an ONNX model:
+    ```
+    python main.py --mode onnx --version 5
+    ```
+* Put test audios in `test_samples` and inference with the converted ONNX model (see `inference_onnx.py` for more details):
+     ```
+    python inference_onnx.py
+    ```
+
 
 ## Configure a new dataset
+
 Our implementation currently works with the VCTK and VIVOS datasets but can be easily extensible to a new one.
-* Firstly, you need to prepare `train.txt` and `test.txt`. See `./data/vivos/train.txt` and `./data/vivos/test.txt` for example.
+
+* Firstly, you need to prepare `train.txt` and `test.txt`. See `./data/vivos/train.txt` and `./data/vivos/test.txt` for
+  example.
 * Secondly, add a new dictionary to `CONFIG.DATA.data_dir`:
     ```
     {
@@ -121,9 +164,26 @@ Our implementation currently works with the VCTK and VIVOS datasets but can be e
     'test': 'path/to/test.txt'
     }
     ```
-    **Important:** Make sure each line in `train.txt` and `test.txt` joining with `'root'` is a valid path to its corresponding audio file.
+  **Important:** Make sure each line in `train.txt` and `test.txt` joining with `'root'` is a valid path to its
+  corresponding audio file.
 
-# 4. Citation
+# 4. Results
+Our model achieved a significant gain over baselines in both objective and subjective tests. Here, we show subjective scores based on Microsoft's [DNSMOS](https://github.com/microsoft/DNS-Challenge/tree/master/DNSMOS). Please refer to our paper for more benchmarks.
+
+| Model | DNSMOS | 
+| -------- | -------- |
+|Input     | 3.0951   | 
+|TFiLM-UNet     | 3.1026   | 
+|WSRGlow     | 3.2053   | 
+|NU-Wave     | 3.2760   | 
+|TUNet     | **3.3896**|
+
+We also provide several audio samples in https://github.com/NXTProduct/TUNet/tree/master/audio_samples for comparison. In spectrogram visualization, it can be seen that high frequencies generated by our models are more accurate than the baselines.
+
+![](audio_samples/sample_1/spec_1.png)
+
+# 5. Citation
+
 ```
 @misc{nguyen2021tunet,
       title={TUNet: A Block-online Bandwidth Extension Model based on Transformers and Self-supervised Pretraining}, 

@@ -6,12 +6,10 @@ import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
 import soundfile as sf
-import tensorflow as tf
 import torch
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from numpy.random import default_rng
 from scipy.signal import dlti
-from scipy.signal import hanning
 from scipy.signal._upfirdn import upfirdn
 from scipy.signal.filter_design import cheby1
 from scipy.signal.fir_filter_design import firwin
@@ -163,17 +161,19 @@ def compute_metrics(x_hr, pred_audio):
     return np.array([lsd, lsd_high, sisdr])
 
 
-def overlap_add(batch_pred, window_size, stride):
-    w = hanning(window_size)
-    pred = tf.convert_to_tensor(batch_pred)
-    window = np.array([w] * pred.shape[0])
-    window[0, :stride] = np.ones((stride))
-    window[-1, -stride:] = np.ones((stride))
-
-    window = tf.convert_to_tensor(window, dtype=np.float)
-    pred *= window
-    pred = tf.signal.overlap_and_add(pred, stride).numpy()
-    return pred
+def overlap_add(x, win_len, hop_size, target_shape):
+    # target.shape = (B, C, seq_len)
+    # x.shape = (B*n_chunks, C, win_len) , n_chunks = (seq_len - hop_size)/(win_len - hop_size)
+    bs, channels, seq_len = target_shape
+    hann_windows = torch.ones(x.shape, device=x.device) * torch.hann_window(win_len, device=x.device)
+    hann_windows[0, :, :hop_size] = 1
+    hann_windows[-1, :, -hop_size:] = 1
+    x *= hann_windows
+    x = x.permute(1, 0, 2).reshape(bs * channels, -1, win_len).permute(0, 2, 1)  # B*C, win_len, n_chunks
+    fold = torch.nn.Fold(output_size=(1, seq_len), kernel_size=(1, win_len), stride=(1, hop_size))
+    x = fold(x)  # B*C, 1, 1, seq_len
+    x = x.reshape(channels, bs, seq_len).permute(1, 0, 2)  # B, C, seq_len
+    return x
 
 
 def evaluate_dataset(model, test_loader, sample_path, eval_input=False):
@@ -184,9 +184,8 @@ def evaluate_dataset(model, test_loader, sample_path, eval_input=False):
         inp = inp.numpy()[0, :]
         if not eval_input:
             pred = model(x_lr.cuda(device=0)[0])
-            pred = torch.squeeze(pred, 1).detach().cpu().numpy()
-            pred = overlap_add(pred, window_size, stride)
-
+            pred = overlap_add(pred, window_size, stride, (1, 1, len(x_hr)))  # batch_size=1, 1 channel
+            pred = torch.squeeze(pred).detach().cpu().numpy()
             if i in [1, 5, 7]:
                 path = os.path.join(sample_path, 'sample_' + str(i))
                 visualize(x_hr, inp, pred, path)

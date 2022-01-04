@@ -24,7 +24,7 @@ parser.add_argument('--mode', default='train',
 
 args = parser.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = str(CONFIG.gpus)
-assert args.mode in ['train', 'eval', 'test'], "--mode should be 'train', 'eval' or 'test'"
+assert args.mode in ['train', 'eval', 'test', 'onnx'], "--mode should be 'train', 'eval', 'test' or 'onnx'"
 
 
 def resume(train_dataset, val_dataset, version):
@@ -87,9 +87,23 @@ def test(model):
         x = frame(sig, window_size, stride)[:, np.newaxis, :]
         x = torch.Tensor(x).cuda(device=0)
         pred = model(x)
-        pred = np.squeeze(pred.detach().cpu().numpy(), 1)
-        audio = overlap_add(pred, window_size, stride)
+        pred = overlap_add(pred, window_size, stride, (1, 1, len(sig)))
+        audio = np.squeeze(pred.detach().cpu().numpy())
         sf.write(os.path.join(out_dir, 'recon_' + file), audio, samplerate=sr, subtype='PCM_16')
+
+
+def to_onnx(model, onnx_path):
+    model.eval()
+    x = torch.randn(1, 1, CONFIG.DATA.window_size)
+    torch.onnx.export(model,
+                      x,
+                      onnx_path,
+                      export_params=True,
+                      opset_version=12,
+                      input_names=['input'],
+                      output_names=['output'],
+                      do_constant_folding=True,
+                      verbose=False)
 
 
 if __name__ == '__main__':
@@ -100,9 +114,15 @@ if __name__ == '__main__':
         model = resume(None, None, args.version)
         print(model.hparams)
         model.summarize()
-        model.eval().cuda(device=0)
+        model.eval()
         model.freeze()
         if args.mode == 'eval':
+            model.cuda(device=0)
             evaluate(model)
-        else:
+        elif args.mode == 'test':
+            model.cuda(device=0)
             test(model)
+        else:
+            onnx_path = 'lightning_logs/version_{}/checkpoints/tunet.onnx'.format(str(args.version))
+            to_onnx(model, onnx_path)
+            print('ONNX model saved to', onnx_path)
