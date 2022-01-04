@@ -8,7 +8,7 @@
 [![Generic badge](https://img.shields.io/github/last-commit/NXTProduct/TUNet?color=blue&label=last%20commit&style=flat-square)](https://github.com/NXTProduct/TUNet/commits)
 ## License and citation
 This code is available for academic research only. If you use our software, please cite as below.
-For commercial application, please contact [nxt.sales@fsoft.com.vn](mailto:nxt.sales@fsoft.com.vn).
+For commercial applications, please contact [nxt.sales@fsoft.com.vn](mailto:nxt.sales@fsoft.com.vn).
 
 Copyright © 2021 FPT Software, Inc. All rights reserved.
 
