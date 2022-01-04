@@ -24,7 +24,7 @@ Copyright © 2021 FPT Software, Inc. All rights reserved.
 ```
 
 # 1. Results
-Our model achieved a significant gain over baselines in both objective and subjective tests. Here, we include the predicted mean-opion-score (MOS) using Microsoft's [DNSMOS](https://github.com/microsoft/DNS-Challenge/tree/master/DNSMOS) Azure service. Please refer to our paper for more benchmarks.
+Our model achieved a significant gain over baselines. Here, we include the predicted mean-opion-score (MOS) using Microsoft's [DNSMOS](https://github.com/microsoft/DNS-Challenge/tree/master/DNSMOS) Azure service. Please refer to our paper for more benchmarks.
 
 | Model | DNSMOS | 
 | -------- | -------- |
