@@ -2,17 +2,15 @@
 
 **TUNet: A Block-online Bandwidth Extension Model based on Transformers and Self-supervised Pretraining**
 
-Viet-Anh Nguyen, Anh H. T. Nguyen, and Andy W. H. Khong
 
 [![Generic badge](https://img.shields.io/badge/arXiv-2110.13492-brightgreen.svg?style=flat-square)](https://arxiv.org/abs/2110.13492)
 [![Generic badge](https://img.shields.io/github/stars/NXTProduct/TUNet?color=yellow&label=TUNet&logo=github&style=flat-square)](https://github.com/NXTProduct/TUNet/)
 [![Generic badge](https://img.shields.io/github/last-commit/NXTProduct/TUNet?color=blue&label=last%20commit&style=flat-square)](https://github.com/NXTProduct/TUNet/commits)
 ## License and citation
-```buildoutcfg
 This code is available for academic research only. If you use our software, please cite as below.
-For commercial application, please contact nxt.sales@fsoft.com.vn.
+For commercial application, please contact [nxt.sales@fsoft.com.vn](mailto:nxt.sales@fsoft.com.vn).
+
 Copyright © 2021 FPT Software, Inc. All rights reserved.
-```
 
 ```
 @misc{nguyen2021tunet,
@@ -161,28 +159,6 @@ our paper to fully understand each parameter.
   This will give the mean and standard deviation of LSD, LSD-HF, and SI-SDR, respectively. During the evaluation,
   several output samples are saved to `CONFIG.LOG.sample_path` for sanity testing.
 
-## Audio generation
-
-* In order to generate output audios, you need to either put your input samples into `./test_samples` or
-  modify `CONFIG.TEST.in_dir` to your input directory.
-* Run `main.py`:
-    ```
-    python main.py --mode test --version 5
-    ```
-  The generated audios are saved to `CONFIG.TEST.out_dir`.
-  
-## ONNX inferencing
-We provide scripts for ONNX inferencing.
-* Convert a checkpoint to an ONNX model:
-    ```
-    python main.py --mode onnx --version 5
-    ```
-* Put test audios in `test_samples` and inference with the converted ONNX model (see `inference_onnx.py` for more details):
-     ```
-    python inference_onnx.py
-    ```
-
-
 ## Configure a new dataset
 
 Our implementation currently works with the VCTK and VIVOS datasets but can be easily extensible to a new one.
@@ -199,6 +175,28 @@ Our implementation currently works with the VCTK and VIVOS datasets but can be e
     ```
   **Important:** Make sure each line in `train.txt` and `test.txt` joining with `'root'` is a valid path to its
   corresponding audio file.
-# 5. Acknowledgement
-Thank FPT Software for funding and providing GPU infrastructure. 
+  
+# 5. Audio generation
+
+* In order to generate output audios, you need to either put your input samples into `./test_samples` or
+  modify `CONFIG.TEST.in_dir` to your input directory.
+* Run `main.py`:
+    ```
+    python main.py --mode test --version 5
+    ```
+  The generated audios are saved to `CONFIG.TEST.out_dir`.
+  
+  ## ONNX inferencing
+  We provide scripts for ONNX inferencing.
+  * Convert a checkpoint to an ONNX model:
+      ```
+      python main.py --mode onnx --version 5
+      ```
+  * Put test audios in `test_samples` and inference with the converted ONNX model (see `inference_onnx.py` for more details):
+       ```
+      python inference_onnx.py
+      ```
+
+# 6. Acknowledgement
+We thank FPT Software for funding and providing GPU infrastructure. 
 We also thank Microsoft for giving access to the DNSMOS Azure service. 
