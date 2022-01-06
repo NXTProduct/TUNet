@@ -4,6 +4,7 @@
 
 
 [![Generic badge](https://img.shields.io/badge/arXiv-2110.13492-brightgreen.svg?style=flat-square)](https://arxiv.org/abs/2110.13492)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/tunet-a-block-online-bandwidth-extension/audio-super-resolution-on-vctk-multi-speaker-1)](https://paperswithcode.com/sota/audio-super-resolution-on-vctk-multi-speaker-1?p=tunet-a-block-online-bandwidth-extension)
 [![Generic badge](https://img.shields.io/github/stars/NXTProduct/TUNet?color=yellow&label=TUNet&logo=github&style=flat-square)](https://github.com/NXTProduct/TUNet/)
 [![Generic badge](https://img.shields.io/github/last-commit/NXTProduct/TUNet?color=blue&label=last%20commit&style=flat-square)](https://github.com/NXTProduct/TUNet/commits)
 ## License and citation
