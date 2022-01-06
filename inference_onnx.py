@@ -13,7 +13,7 @@ input_audio, _ = librosa.load('test_samples/input.wav', sr=16000)
 d = max(len(input_audio) // stride + 1, 2) * stride
 input_audio = np.hstack((input_audio, np.zeros(d - len(input_audio))))
 
-session = onnxruntime.InferenceSession('lightning_logs/version_5/checkpoints/tunet.onnx')
+session = onnxruntime.InferenceSession('lightning_logs/best_model.onnx')
 input_name = session.get_inputs()[0].name
 output_name = session.get_outputs()[0].name
 
