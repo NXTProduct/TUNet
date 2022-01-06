@@ -188,7 +188,7 @@ Our implementation currently works with the VCTK and VIVOS datasets but can be e
   
   **Note:** checkpoint `version_5` has only been trained for a few epochs for demonstration purposes. Since the code has been refactored, the checkpoint we used in the paper could not be loaded. To inference with our best checkpoint, please use the ONNX model instead.
   ## ONNX inferencing
-  We provide ONNX inferencing scripts and the ONNX model (converted from the best checkpoint) at `lightning_logs/best_model.onnx`.
+  We provide ONNX inferencing scripts and the best ONNX model (converted from the best checkpoint) at `lightning_logs/best_model.onnx`.
   * Convert a checkpoint to an ONNX model:
       ```
       python main.py --mode onnx --version 5
