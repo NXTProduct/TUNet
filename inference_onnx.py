@@ -3,7 +3,6 @@ import numpy as np
 import onnxruntime
 import soundfile as sf
 import torch
-
 from config import CONFIG
 from utils.utils import frame, overlap_add
 

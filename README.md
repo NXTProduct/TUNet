@@ -1,6 +1,6 @@
 # TUNet - Official Implementation
 
-**TUNet: A Block-online Bandwidth Extension Model based on Transformers and Self-supervised Pretraining**
+**TUNet: A Block-online Bandwidth Extension Model based on Transformers and Self-supervised Pretraining - ICASSP 2022**
 
 
 [![Generic badge](https://img.shields.io/badge/arXiv-2110.13492-brightgreen.svg?style=flat-square)](https://arxiv.org/abs/2110.13492)
