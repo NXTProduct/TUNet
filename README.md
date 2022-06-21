@@ -14,13 +14,15 @@ For commercial applications, please contact [nxt.sales@fsoft.com.vn](mailto:nxt.
 Copyright © 2021 FPT Software, Inc. All rights reserved.
 
 ```
-@misc{nguyen2021tunet,
-      title={TUNet: A Block-online Bandwidth Extension Model based on Transformers and Self-supervised Pretraining}, 
-      author={Viet-Anh Nguyen and Anh H. T. Nguyen and Andy W. H. Khong},
-      year={2021},
-      eprint={2110.13492},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+@inproceedings{Nguyen_2022,
+	doi = {10.1109/icassp43922.2022.9747699},
+	url = {https://doi.org/10.1109%2Ficassp43922.2022.9747699},
+	year = 2022,
+	month = {may},
+	publisher = {{IEEE}},
+	author = {Viet-Anh Nguyen and Anh H. T. Nguyen and Andy W. H. Khong},
+	title = {{TUNet}: A Block-Online Bandwidth Extension Model Based On Transformers And Self-Supervised Pretraining},
+	booktitle = {{ICASSP} 2022 - 2022 {IEEE} International Conference on Acoustics, Speech and Signal Processing ({ICASSP})}
 }
 ```
 
